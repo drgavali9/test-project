@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class);
 
-Route::resource('signup', \App\Http\Controllers\Auth\SignupController::class)->only(['create', 'store']);
+Route::get('verify-email', [\App\Http\Controllers\Auth\VarifyEmailController::class, 'index'])->name('verification.verify');
+Route::get('signup', [\App\Http\Controllers\Auth\SignupController::class, 'create'])->name('signup.create');
+Route::post('signup', [\App\Http\Controllers\Auth\SignupController::class, 'store'])->middleware('throttle:60,1')->name('signup.store');
 
 Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login.create');
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:60,1')->name('login.store');

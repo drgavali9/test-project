@@ -27,6 +27,6 @@ class SignupController extends Controller
 
         event(new Registered($user));
 
-        redirect(route('login.create'))->with('message', 'You are register successfully!');
+        return redirect(route('login.create'))->with('message', 'You are register successfully!');
     }
 }

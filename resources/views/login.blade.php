@@ -173,6 +173,12 @@
             </div>
         @endif
 
+        @if(session()->has('error_message'))
+            <div class="alert alert-danger">
+                {{ session()->get('error_message') }}
+            </div>
+        @endif
+
         <form action="{{route('login.store')}}" method="post" style="border:1px solid #ccc">
             @csrf
             <div class="container">
@@ -194,7 +200,7 @@
                 @enderror
 
                 <div class="clearfix">
-                    <button type="submit" class="signupbtn">Sign Up</button>
+                    <button type="submit" class="signupbtn">Login</button>
                 </div>
             </div>
         </form>
