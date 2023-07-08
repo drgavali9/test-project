@@ -13,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', \App\Http\Controllers\HomeController::class);
 
-Route::resource('signup',\App\Http\Controllers\Auth\SignupController::class)->only(['create','store']);
-Route::resource('login',\App\Http\Controllers\Auth\LoginController::class)->only(['create','store']);
+Route::resource('signup', \App\Http\Controllers\Auth\SignupController::class)->only(['create', 'store']);
 
+Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login.create');
+Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:60,1')->name('login.store');
 
+Route::middleware(['custom_auth'])->group(function () {
+    Route::get('dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
+});
