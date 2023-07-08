@@ -22,7 +22,7 @@ class SignupController extends Controller
             'name'     => $request->name,
             'phone'    => $request->phone,
             'email'    => $request->email,
-            'password' => Hash::make($request->newPassword),
+            'password' => bcrypt($request->newPassword),
         ]);
 
         event(new Registered($user));

@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             return redirect(route('dashboard'))->with(['message' => 'You are login successfully.']);
         }
 
